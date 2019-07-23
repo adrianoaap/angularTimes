@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html ng-app='times'>
 <head>
-    <meta charset="UTF-8">
-    <title>Times Mundiais</title>
+    <meta charset='UTF-8'>
+    <title>Times Nacionais</title>
     <link rel='stylesheet' type='text/css' href='css/bootstrap.css'>
     <script src='lib/angular.js'></script>
     <script src='js/times.js'></script>
     <script src='js/controller/timesController.js'></script>
     <style>
       .jumbotron {
-          width: 400px;
+          width: 600px;
           text-align: center;
           margin-top: 20px;
           margin-left: auto;
@@ -26,27 +26,29 @@
 </head>
 <body ng-controller='timesCtrl as vm'>
    
-    <div class="jumbotron">
+    <div class='jumbotron'>
         <h3>{{ vm.titulo }}</h3>
         <h4> {{   vm.parei }}</h4>
-        <table class="table table-striped">
-            <tr>
-                <th>Nome</th>
-                <th>Mascote</th>
+        <table class='table table-striped'>
+            <tr >
+                <th style="text-align: center">Nome</th>
+                <th style="text-align: center">Mascote</th>
+                <th style="text-align: center">Cidade</th>
             </tr>
             <tr ng-repeat='time in vm.timesFutebol'>
                 <td>{{ time.name }}</td>
                 <td>{{ time.mascote }}</td>
+                <td>{{ time.estado.nome }}</td>
             </tr>
         </table>
         <hr />
-        <input class='form-control' type="text" ng-model='vm.time.name'>
-        <input class='form-control' type="text" ng-model='vm.time.mascote'>
+        <input class='form-control' type='text' ng-model='vm.time.name' placeholder='Time'>
+        <input class='form-control' type='text' ng-model='vm.time.mascote' placeholder='Mascote'>
         <select class='form-control'
-          ng-model='vm.estado' ng-options='vm.estado.name for estado in vm.estados'>
-           <option value="">Selecione um estado</option>
+          ng-model='vm.time.estado' ng-options='estado.nome for estado in vm.estados'>
+           <option value=''>Selecione um estado</option>
         </select>
-        <button class="btn btn-success btn-block" ng-click='vm.adcionarTime(vm.time)' 
+        <button class='btn btn-success btn-block' ng-click='vm.adcionarTime(vm.time)' 
           ng-disabled='!(vm.time.name && vm.time.mascote)'>Adcionar Time</button>
     </div>
     {{ vm.estados }}

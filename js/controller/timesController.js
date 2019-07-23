@@ -1,21 +1,23 @@
 angular.module("times").controller("timesCtrl", function($scope) {
   var vm = this;
-  vm.times = [];
+  vm.times = []
+  vm.estados = []
   vm.time = {}
 
   vm.adcionarTime = adcionarTime
 
-  vm.parei =' na aula 3 11 minutos'
+  vm.parei =' na aula 3 17 minutos '
   vm.titulo = 'Lista Time'
+
   vm.timesFutebol = [
     { name: "Flamengo", mascote: "Urubu"},
-    { name: "Grêmeo", mascote: "Mosqueteiro" },
-    { name: "Santos", mascote: "Peixe"}
+    { name: "Gama", mascote: "Piriquito" },
+    { name: "Ponte Preta", mascote: "Macaca"}
   ];
   vm.estados = [
-      { name: 'Rio de janeiro', uf: 'RJ'},
-      { name: 'Rio Grande do Sul', uf: 'RS'},
-      { name: 'São Paulo', uf: 'SP'}
+      { nome: 'Rio de janeiro', uf: 'RJ'},
+      { nome: 'Brasilia', uf: 'DF'},
+      { nome: 'Campinas', uf: 'SP'}
   ]
 
   function adcionarTime(time){
