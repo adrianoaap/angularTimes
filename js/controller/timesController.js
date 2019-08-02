@@ -5,14 +5,14 @@ angular.module("times").controller("timesCtrl", function($scope) {
   vm.time = {}
 
   vm.adcionarTime = adcionarTime
+  vm.apagarTime = apagarTime
 
-  vm.parei =' na aula 3 17 minutos '
   vm.titulo = 'Lista Time'
 
   vm.timesFutebol = [
     { name: "Flamengo", mascote: "Urubu"},
-    { name: "Gama", mascote: "Piriquito" },
-    { name: "Ponte Preta", mascote: "Macaca"}
+    { name: "Santos", mascote: "Peixe" },
+    { name: "Grêmeo", mascote: "Mosqueteiro"}
   ];
   vm.estados = [
       { nome: 'Rio de janeiro', uf: 'RJ'},
@@ -24,4 +24,18 @@ angular.module("times").controller("timesCtrl", function($scope) {
     vm.timesFutebol.push(angular.copy(time))
     delete vm.time
   }
+
+  function apagarTime(timesFutebol){
+    vm.timesFutebol = timesFutebol.filter(function(time){
+      if(!time.selecionado)
+       return time
+    })
+  }
+
+  vm.ordenarPor = function(campo){
+     vm.criterioDeOrdenacao = campo
+     vm.direcaoDaOrdenacao = !vm.direcaoDaOrdenacao
+  }
+
+ 
 });

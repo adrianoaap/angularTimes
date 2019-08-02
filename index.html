@@ -18,31 +18,37 @@
       .table {
           margin-top: 20px
       }
-
+    .selecionado{
+        background-color: yellow;
+    }
+    .negrito {
+        font-weight: bold
+    }
       .form-control{
           margin-bottom: 5px
       }
     </style>
 </head>
 <body ng-controller='timesCtrl as vm'>
-   
     <div class='jumbotron'>
         <h3>{{ vm.titulo }}</h3>
-        <h4> {{   vm.parei }}</h4>
+        <input class="form-control" ng-model='vm.criterioDebusca' placeholder="O que você esta buscando?" />
         <table class='table table-striped'>
             <tr >
-                <th style="text-align: center">Nome</th>
-                <th style="text-align: center">Mascote</th>
-                <th style="text-align: center">Cidade</th>
+                <th></th>
+                <th style="text-align: center"><a href="" ng-click="vm.ordenarPor('name')">Nome</a></th>
+                <th style="text-align: center"><a href="" ng-click="vm.ordenarPor('mascote')">Mascote</a></th>
+                <th style="text-align: center">Cidade</th>\
             </tr>
-            <tr ng-repeat='time in vm.timesFutebol'>
-                <td>{{ time.name }}</td>
+            <tr ng-repeat="time in vm.timesFutebol | filter: vm.criterioDebusca | orderBy: vm.criterioDeOrdenacao:vm.direcaoDaOrdenacao"  ng-class='{selecionado: time.selecionado, negrito: time.selecionado}'>
+                <td><input id='todos' type='checkbox' ng-model='time.selecionado' /></td>
+                <td>{{ time.name | uppercase }}</td>
                 <td>{{ time.mascote }}</td>
                 <td>{{ time.estado.nome }}</td>
             </tr>
         </table>
         <hr />
-        <input class='form-control' type='text' ng-model='vm.time.name' placeholder='Time'>
+        <input class='form-control' type='text' ng-model='vm.time.name' placeholder='Time' ng-required='true'>
         <input class='form-control' type='text' ng-model='vm.time.mascote' placeholder='Mascote'>
         <select class='form-control'
           ng-model='vm.time.estado' ng-options='estado.nome for estado in vm.estados'>
@@ -50,7 +56,10 @@
         </select>
         <button class='btn btn-success btn-block' ng-click='vm.adcionarTime(vm.time)' 
           ng-disabled='!(vm.time.name && vm.time.mascote)'>Adcionar Time</button>
+
+          <button class='btn btn-danger btn-block' ng-click='vm.apagarTime(vm.timesFutebol)' ng-disabled='!vm.isContatoSelecionado(vm.timesFutebol)'>
+              Apagar Time</button>
     </div>
-    {{ vm.estados }}
+
 </body>
 </html>
